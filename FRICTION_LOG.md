@@ -13,3 +13,10 @@ These actions have helped me resolve the issue and get a response from the model
 * In agent.py for role made a simple typo mistake of "System" for "system".
 ### Tool Friction
 Faced no problems today, the model worked as intended.
+
+## Day-3 (Sun 18 Oct 2026)
+
+### My mistakes
+* Telegram bot timed out at start (telegram.error.TimedOut when run_polling started) and after trying again by changing the internet connection, it started working (cause unverified, most probably network).
+### Tool Friction
+* The nemotron model replies in markdown format by default(**Rafooz**), but my bot replies in plain text.
