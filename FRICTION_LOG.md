@@ -20,3 +20,11 @@ Faced no problems today, the model worked as intended.
 * Telegram bot timed out at start (telegram.error.TimedOut when run_polling started) and after trying again by changing the internet connection, it started working (cause unverified, most probably network).
 ### Tool Friction
 * The nemotron model replies in markdown format by default(**Rafooz**), but my bot replies in plain text.
+
+## Day-4 (Mon 19 Oct 2026 & Tue 20 Oct 2026)
+
+### Tool Friction
+* Latency from about 2s to 30s for similar requests, with token counts.
+* A reminder costs about 8s for two rounds.
+* Reasoning tokens inflate completion_tokens, and the API doesn’t show the split.
+* The docs example uses a different model and stops before the second call.
