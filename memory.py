@@ -29,6 +29,11 @@ def save_message(user_id, role, text, db_path=DB_PATH):
     con.commit()
     con.close()
 
+def get_ist_now():
+    ist_zone = timezone(timedelta(hours=5, minutes=30))
+    ist_moment = datetime.now(ist_zone)
+    return ist_moment.replace(tzinfo=None)
+
 def save_reminder(user_id, reminder_text, due_at, db_path=DB_PATH):
     if not isinstance(reminder_text, str) or not reminder_text.strip():
         msg = "reminder_text must not be empty or whitespace-only"
@@ -46,9 +51,7 @@ def save_reminder(user_id, reminder_text, due_at, db_path=DB_PATH):
        "for example 2026-10-20T18:06:00, and call the tool again.")
          return msg
 
-    ist_zone = timezone(timedelta(hours=5, minutes=30))
-    ist_moment = datetime.now(ist_zone)
-    ist_now = ist_moment.replace(tzinfo=None) 
+    ist_now = get_ist_now()
     if due < ist_now:
         msg = f"{reminder_text} is rejected. Invalid due_at: the date and time must be in the future. Ask user again to" \
         " provide a valid future date and time in the format YYYY-MM-DDTHH:MM:SS."
@@ -61,6 +64,26 @@ def save_reminder(user_id, reminder_text, due_at, db_path=DB_PATH):
     con.commit()
     con.close()
     return f"Reminder saved successfully. Due = {due_text}"
+
+def due_reminders(db_path=DB_PATH):
+    con = sqlite3.connect(db_path)
+    cursor = con.cursor()
+    now = get_ist_now().isoformat(timespec='seconds')
+    cursor.execute(
+        "SELECT id, user_id, reminder_text FROM reminders "
+        "WHERE done = 0 AND due_at <= ? ORDER BY due_at ASC",
+        (now,),
+    )
+    reminders = cursor.fetchall()
+    con.close()
+    return reminders
+
+def mark_done(reminder_id, db_path=DB_PATH):
+    con = sqlite3.connect(db_path)
+    cursor = con.cursor()
+    cursor.execute("UPDATE reminders SET done = 1 WHERE id = ?", (reminder_id,))
+    con.commit()
+    con.close()
 
 def fetch_messages(user_id,N, db_path=DB_PATH):
     con=sqlite3.connect(db_path)
