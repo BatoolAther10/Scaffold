@@ -1,5 +1,5 @@
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 DB_PATH = 'agent.db'
 
 def setup(db_path=DB_PATH):
@@ -46,6 +46,13 @@ def save_reminder(user_id, reminder_text, due_at, db_path=DB_PATH):
        "for example 2026-10-20T18:06:00, and call the tool again.")
          return msg
 
+    ist_zone = timezone(timedelta(hours=5, minutes=30))
+    ist_moment = datetime.now(ist_zone)
+    ist_now = ist_moment.replace(tzinfo=None) 
+    if due < ist_now:
+        msg = f"{reminder_text} is rejected. Invalid due_at: the date and time must be in the future. Ask user again to" \
+        " provide a valid future date and time in the format YYYY-MM-DDTHH:MM:SS."
+        return msg
     due_text = due.isoformat(timespec='seconds')
     con = sqlite3.connect(db_path)
     cursor = con.cursor()
