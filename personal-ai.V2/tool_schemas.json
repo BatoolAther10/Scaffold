@@ -1,0 +1,30 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "log_habit",
+      "description": "Log a completed study habit and award XP.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "habit_name": {
+            "type": "string",
+            "description": "The name of the habit or task completed."
+          }
+        },
+        "required": ["habit_name"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_status",
+      "description": "Get the user's current XP, level, and streak.",
+      "parameters": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+]
