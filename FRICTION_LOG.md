@@ -28,3 +28,16 @@ Faced no problems today, the model worked as intended.
 * A reminder costs about 8s for two rounds.
 * Reasoning tokens inflate completion_tokens, and the API doesn’t show the split.
 * The docs example uses a different model and stops before the second call.
+
+## Day-5 (Wed 21 Oct 2026)
+
+### Tool friction
+* Response time varied a lot with no code change. A reply with no tool call took 18.56s in one run and 2.56s in another. Tool-call turns took two model rounds, for example 5.08s + 2.87s and 5.41s + 2.20s, so a reminder takes about 8 to 10s end to end. Cause unverified. A note in the docs on expected latency for Nemotron-3-Nano would help.
+* The model sometimes handles a past time itself (it asked us for a new time without calling the tool) and sometimes calls the tool and relays our error. This makes the code-side check hard to test through the model, so we test the function directly.
+* When asking for a new time, the model gave an example date in the past ("2025-04-05"). It does not seem to anchor examples to the date in the system message.
+
+### Other tools
+* python-telegram-bot: JobQueue needs an extra install (`pip install "python-telegram-bot[job-queue]"`). The plain install does not mention this.
+* python-telegram-bot docs: datetimes without a timezone are treated as UTC by default. Easy to miss when stored times are in IST.
+* SQLite Viewer (VS Code extension): deleting rows asks for a premium upgrade. So deleted test rows with Python's sqlite3 instead.
+
