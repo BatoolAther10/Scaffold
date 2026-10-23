@@ -48,3 +48,9 @@ Faced no problems today, the model worked as intended.
 * Even with a plain system prompt, replies use Markdown, bold, lists and emojis. The same chat on Telegram shows literal asterisks. Needs an explicit "no markdown" instruction.
 * Model latency again varied from about 2s to 4s for short replies with no code change.
 * After a fixed crisis reply, the model answered "ok thanks" cheerfully. History alone does not set tone.
+
+## Day-7 (Fri 23 Oct 2026)
+
+### Tool Friction
+* Reply time for the same kind of message ranged from 1.5s to 12s, with no code change. The reminder took 12s, then 2.9s, for two model rounds.
+* The model said a reminder was "set for 22:42:42", but the model's words are not proof. I had to check the database row myself.
