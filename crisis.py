@@ -1,5 +1,4 @@
 import pathlib
-import re
 
 CRISIS_PHRASES_PATH = pathlib.Path(__file__).parent / "crisis_phrases.txt"
 phrase_text = CRISIS_PHRASES_PATH.read_text(encoding="utf-8")
