@@ -7,13 +7,17 @@ CRISIS_PHRASES = [
     for line in phrase_text.splitlines()
     if line.strip()
 ]
+if not CRISIS_PHRASES:
+    raise RuntimeError("crisis_phrases.txt is empty or missing")
 
-FALLBACK_REPLY = " I’m really sorry you’re feeling this way, and I’m glad you told me. " \
-"You don’t have to carry this alone. Please reach out to someone you trust right now, " \
-"like a friend, a family member, or someone near you." \
-"If you are in immediate danger, call 112 (India)." \
-"You can also call Tele-MANAS: 14416 or 1800-89-14416. " \
-"You matter, and people want to help you."
+FALLBACK_REPLY = (
+    "I’m really sorry you’re feeling this way, and I’m glad you told me. "
+    "You don’t have to carry this alone. Please reach out to someone you trust right now, "
+    "like a friend, a family member, or someone near you. "
+    "If you are in immediate danger, call 112 (India). "
+    "You can also call Tele-MANAS: 14416 or 1800-89-14416. "
+    "You matter, and people want to help you."
+)
 CRISIS_TEXT = pathlib.Path(__file__).parent / "crisis.txt"
 try:
     crisis_reply = CRISIS_TEXT.read_text(encoding="utf-8").strip()
