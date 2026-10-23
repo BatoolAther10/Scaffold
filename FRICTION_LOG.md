@@ -41,3 +41,10 @@ Faced no problems today, the model worked as intended.
 * python-telegram-bot docs: datetimes without a timezone are treated as UTC by default. Easy to miss when stored times are in IST.
 * SQLite Viewer (VS Code extension): deleting rows asks for a premium upgrade. So deleted test rows with Python's sqlite3 instead.
 
+## Day-6 (Thu 22 Oct 2026 and Fri 23 OCt 2026)
+
+### Tool Friction
+* Model output sometimes has joined words ("justa bit", "canmake", "stretchbreak", "time(in IST)"). Seen once in a terminal test. Cause unverified (model or endpoint).
+* Even with a plain system prompt, replies use Markdown, bold, lists and emojis. The same chat on Telegram shows literal asterisks. Needs an explicit "no markdown" instruction.
+* Model latency again varied from about 2s to 4s for short replies with no code change.
+* After a fixed crisis reply, the model answered "ok thanks" cheerfully. History alone does not set tone.
