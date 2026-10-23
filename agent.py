@@ -40,8 +40,9 @@ tools = [{
 }]
 def handle_turn(user_id, user_text):
     if (crisis.is_crisis(user_text)):
-        msg = "Please note that I am only a virtual assistant. If you are " \
-        "in crisis or need help, please reach out to people around you or contact 14416 or 1800-891-4416 for professional support."
+        msg = crisis.CRISIS_REPLY
+        memory.save_message(user_id, 'user', user_text)
+        memory.save_message(user_id, 'assistant', msg)
         return msg
     memory.save_message(user_id, 'user', user_text)
     messages = memory.fetch_messages(user_id, N)
