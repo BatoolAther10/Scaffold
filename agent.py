@@ -6,9 +6,13 @@ import json
 from datetime import datetime
 import time as what
 import crisis
+import pathlib
 
 MAX_ROUNDS=5
 N=10
+
+prompts_path = pathlib.Path(__file__).parent / "prompts" / "system_prompt.txt"
+PROMPTS_TEMPLATE = prompts_path.read_text(encoding="utf-8")
 
 load_dotenv()
 api_key = os.getenv("NEBIUS_API_KEY")
@@ -50,14 +54,8 @@ def handle_turn(user_id, user_text):
     weekday = now.strftime("%A")
     date = now.strftime("%Y-%m-%d")
     time = now.strftime("%H:%M:%S")
-    history = [{"role": "system", "content": (
-    f"You are a helpful assistant. Today is {weekday}, {date}. "
-    f"The current time is {time}. The timezone is IST. "
-    "Reply to the user in normal, friendly sentences. "
-    "Monday means the next upcoming Monday, counted from today. "
-    "If the user asks for a reminder but gives no time, ask for the time instead of guessing. "
-    "When you call the save_reminder tool, due_at must be local IST time in the exact "
-    "format YYYY-MM-DDTHH:MM:SS, with no offset and no Z.")}] + messages
+    system_text = PROMPTS_TEMPLATE.replace("{weekday}", weekday).replace("{date}", date).replace("{time}", time)
+    history = [{"role": "system", "content": (system_text)}] + messages
     final_text = "Sorry, something went wrong."
     for i in range(MAX_ROUNDS):      
         start_time = what.perf_counter()
