@@ -24,7 +24,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         logging.error(f"handle_turn failed for user {user_id}: {e}")
         assistant_response = "Sorry, something went wrong. Please try again."
-    await update.message.reply_text(f"Assistant: {assistant_response}")
+    await update.message.reply_text(assistant_response)
 
 async def check_reminders(context: ContextTypes.DEFAULT_TYPE):
     reminders = memory.due_reminders()
