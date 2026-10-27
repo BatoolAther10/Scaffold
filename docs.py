@@ -10,6 +10,18 @@ STOPWORDS = {
     'in', 'on', 'for', 'with', 'at', 'by', 'from', 'this', 'that',
 }
 
+REF_LINE = re.compile(r'^\d{1,3}\.\s+\S')
+REF_HINTS = ('doi:', 'http', 'retrieved', 'pmid', 'issn')
+
+def strip_references(text):
+    lines = text.split('\n')
+    for i, line in enumerate(lines):
+        if REF_LINE.match(line.strip()):
+            window = ' '.join(lines[i:i + 6]).lower()
+            if any(h in window for h in REF_HINTS):
+                return '\n'.join(lines[:i]).strip()
+    return text
+
 def setup_docs(db_path=DB_PATH):
     con = sqlite3.connect(db_path)
     c = con.cursor()
@@ -85,7 +97,7 @@ def ingest_pdf(file_path, db_path=DB_PATH):
     try:
         con.execute('DELETE FROM docs WHERE file = ?', (file_name,))
         for page_number, page in enumerate(reader.pages, 1):
-            text = (page.extract_text() or '').strip()
+            text = strip_references((page.extract_text() or '').strip())
             if not text:
                 skipped_pages += 1
                 print(f'{file_name}: page {page_number} skipped (no text)')
