@@ -54,3 +54,11 @@ Faced no problems today, the model worked as intended.
 ### Tool Friction
 * Reply time for the same kind of message ranged from 1.5s to 12s, with no code change. The reminder took 12s, then 2.9s, for two model rounds.
 * The model said a reminder was "set for 22:42:42", but the model's words are not proof. I had to check the database row myself.
+
+## Day-8 (Sat 24 Oct 2026 and Tue 27 Oct 2026)
+
+### Tool Friction
+- Tool calling: Nemotron Nano answered "lab record" from general knowledge and asked "which cricket match?" instead of calling search_documents. It only searched reliably after the system prompt said "call search_documents first, do not ask a clarifying question." Expected: the tool description alone would be enough.
+- Without strict prompt rules, the model added facts that were not in the tool result (extra details in the quiz answer).
+- Replies take 2s to 30s for the same question (also noted earlier); a tool call needs two model rounds.
+- Model output sometimes contains Markdown and our bot shows it literally
