@@ -7,6 +7,7 @@ from datetime import datetime
 import time as what
 import crisis
 import pathlib
+import docs
 
 MAX_ROUNDS=5
 N=10
@@ -21,27 +22,58 @@ client = OpenAI(
     api_key=api_key
 )
 
-tools = [{
-    "type": "function",
-    "function": {
-        "name": "save_reminder",
-        "description": "Use this when the user asks to be reminded of something at a specific time. If the time is missing or vague, such as 'remind me on Monday', ask the user for the time instead of guessing.",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "reminder_text": {
-                    "type": "string",
-                    "description": "The text of the reminder."
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "save_reminder",
+            "description": "Use this when the user asks to be reminded of something at a specific time. If the time is missing or vague, such as 'remind me on Monday', ask the user for the time instead of guessing.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "reminder_text": {
+                        "type": "string",
+                        "description": "The text of the reminder."
+                    },
+                    "due_at": {
+                        "type": "string",
+                        "description": "The reminder time as local IST time, with no offset and no Z, exactly in the format YYYY-MM-DDTHH:MM:SS."
+                    }
                 },
-                "due_at": {
-                    "type": "string",
-                    "description": "The reminder time as local IST time, with no offset and no Z, exactly in the format YYYY-MM-DDTHH:MM:SS."
-                }
-            },
-            "required": ["reminder_text", "due_at"]
+                "required": ["reminder_text", "due_at"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "search_documents",
+            "description": "Search the user's own documents (PDFs, notes, syllabus). Use this whenever the user asks about their files, deadlines, rules or anything that may be in their documents.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "question": {
+                        "type": "string",
+                        "description": "Key words from the user's question."
+                    }
+                },
+                "required": ["question"]
+            }
         }
     }
-}]
+]
+
+def run_search_documents(arguments_json):
+    try:
+        question = json.loads(arguments_json).get("question", "")
+    except (json.JSONDecodeError, AttributeError):
+        return "Error: invalid arguments."
+    results = docs.search_documents(question)
+    if not results:
+        return ("NOT FOUND: nothing matching in the user's documents. "
+                "Say it was not found in the documents. Do not answer from general knowledge.")
+    return json.dumps(results)
+
 def handle_turn(user_id, user_text):
     if (crisis.is_crisis(user_text)):
         msg = crisis.CRISIS_REPLY
@@ -82,6 +114,8 @@ def handle_turn(user_id, user_text):
                     result = "Error: Invalid JSON in tool call."
                 elif tool_call.function.name == "save_reminder":
                     result = memory.save_reminder(user_id, keep.get("reminder_text"), keep.get("due_at"))
+                elif tool_call.function.name == "search_documents":
+                    result = run_search_documents(tool_call.function.arguments)
                 history.append({"role": "tool", "content": result,
                                 "tool_call_id": tool_call.id,
                                 "name": tool_call.function.name})
