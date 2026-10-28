@@ -8,6 +8,7 @@ import time as what
 import crisis
 import pathlib
 import docs
+import sources
 
 MAX_ROUNDS=5
 N=10
@@ -58,6 +59,23 @@ tools = [
                     }
                 },
                 "required": ["question"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "find_sources",
+            "description": "Find web links for further reading on a topic. Use only when the student asks for links, sources or reading material. Never use it for questions about their own documents.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "topic": {
+                        "type": "string",
+                        "description": "Subject words only, no personal details."
+                    }
+                },
+                "required": ["topic"]
             }
         }
     }
@@ -116,6 +134,8 @@ def handle_turn(user_id, user_text):
                     result = memory.save_reminder(user_id, keep.get("reminder_text"), keep.get("due_at"))
                 elif tool_call.function.name == "search_documents":
                     result = run_search_documents(tool_call.function.arguments)
+                elif tool_call.function.name == "find_sources":
+                    result = sources.find_sources(keep.get("topic"))
                 history.append({"role": "tool", "content": result,
                                 "tool_call_id": tool_call.id,
                                 "name": tool_call.function.name})
