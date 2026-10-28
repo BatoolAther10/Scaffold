@@ -12,6 +12,7 @@ def find_sources(topic):
     if not isinstance(topic, str) or not topic.strip():
         return "Error: topic must be a non-empty string."
     if not api_key:
+        print("Tavily error: API key not configured")
         return "Error: source search is not set up."
 
     try:
