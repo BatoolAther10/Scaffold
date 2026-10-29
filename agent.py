@@ -81,7 +81,7 @@ tools = [
     }
 ]
 
-def run_search_documents(arguments_json, user_id):  # CHANGED
+def run_search_documents(arguments_json, user_id):  
     try:
         question = json.loads(arguments_json).get("question", "")
     except (json.JSONDecodeError, AttributeError):
