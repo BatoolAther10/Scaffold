@@ -81,12 +81,12 @@ tools = [
     }
 ]
 
-def run_search_documents(arguments_json):
+def run_search_documents(arguments_json, user_id):  # CHANGED
     try:
         question = json.loads(arguments_json).get("question", "")
     except (json.JSONDecodeError, AttributeError):
         return "Error: invalid arguments."
-    results = docs.search_documents(question)
+    results = docs.search_documents(question, user_id)  # CHANGED
     if not results:
         return ("NOT FOUND: nothing matching in the user's documents. "
                 "Say it was not found in the documents. Do not answer from general knowledge.")
@@ -133,7 +133,7 @@ def handle_turn(user_id, user_text):
                 elif tool_call.function.name == "save_reminder":
                     result = memory.save_reminder(user_id, keep.get("reminder_text"), keep.get("due_at"))
                 elif tool_call.function.name == "search_documents":
-                    result = run_search_documents(tool_call.function.arguments)
+                    result = run_search_documents(tool_call.function.arguments, user_id)  # CHANGED
                 elif tool_call.function.name == "find_sources":
                     result = sources.find_sources(keep.get("topic"))
                 history.append({"role": "tool", "content": result,
@@ -152,4 +152,3 @@ if __name__ == "__main__":
             break
         assistant_response = handle_turn(user_id, user_text)
         print(f"Assistant: {assistant_response}")
-

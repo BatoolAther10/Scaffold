@@ -223,3 +223,7 @@ agent.db
 *.db
 
 docs_samples/testpdf1.pdf
+
+user_docs/
+
+.env
