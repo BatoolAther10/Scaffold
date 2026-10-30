@@ -66,7 +66,7 @@ Never commit `.env`, `.venv`, `*.db` or `user_docs/`. They are in `.gitignore`.
 ## Try it (demo)
 
 - **Demo bot:** https://t.me/originskbot
-- **Availability:** the bot runs on a team member's computer in Hyderabad, India (IST, UTC+5:30). Planned online hours on Dec 1 to 15, 2026: 6:00 PM to 12:00 AM IST (about 5:30 AM to 11:30 AM Pacific) (Please mail shaikrafooz@gmail.com to turn activate the bot for evaluation). Outside these hours the bot may be offline and will not reply; a screen recording of the full flow is in our demo video.
+- **Availability:** the bot runs on a team member's computer in Hyderabad, India (IST, UTC+5:30). Planned online hours on Dec 1 to 15, 2026: 6:00 PM to 12:00 AM IST (about 5:30 AM to 11:30 AM Pacific) (Please mail shaikrafooz@gmail.com to activate the bot for evaluation). Outside these hours the bot may be offline and will not reply; a screen recording of the full flow is in our demo video.
 - Suggested test messages:
   1. "hello"
   2. Send a PDF in the chat, then ask a question about it.
