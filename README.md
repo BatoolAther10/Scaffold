@@ -66,13 +66,25 @@ Never commit `.env`, `.venv`, `*.db` or `user_docs/`. They are in `.gitignore`.
 ## Try it (demo)
 
 - **Demo bot:** https://t.me/originskbot
-- **Availability:** the bot runs on a team member's computer in Hyderabad, India (IST, UTC+5:30). Planned online hours on Dec 1 to 15, 2026: 6:00 PM to 12:00 AM IST (about 5:30 AM to 11:30 AM Pacific) (Please mail shaikrafooz@gmail.com to activate the bot for evaluation). Outside these hours the bot may be offline and will not reply; a screen recording of the full flow is in our demo video.
-- Suggested test messages:
+
+- **Availability & Evaluation Requests:**
+  - **Hosting:** The Scaffold Telegram bot is currently hosted locally on a team member's computer in Hyderabad, India (IST, UTC+5:30).
+  - **Planned Availability:** December 1–15, 2026.
+  - **Operating Hours:** 6:00 PM – 12:00 AM IST (4:30 AM – 10:30 AM PST).
+
+  We kindly request evaluators to email **shaikrafooz@gmail.com** in advance with their preferred evaluation date and time. We will coordinate accordingly and ensure the bot is online and accessible during the agreed evaluation window.
+
+  Please note that the bot may be offline outside the scheduled hours, as it requires the host machine to remain running.
+
+  A screen recording demonstrating the complete project workflow is also available in our demo video for reference.
+
+- **Suggested test messages:**
   1. "hello"
   2. Send a PDF in the chat, then ask a question about it.
   3. Ask something that is not in your files. It should say it could not find it.
   4. "Remind me to submit my report tomorrow at 6 pm"
   5. "Give me sources on spaced repetition"
+
 - The shared demo folder contains the Wikipedia article "Spaced repetition" (Wikipedia contributors, https://en.wikipedia.org/wiki/Spaced_repetition, retrieved 27 Oct 2026), used under the Creative Commons Attribution-ShareAlike 4.0 License, plus two small sample files. This PDF is not covered by the MIT license of the code.
 
 ## Privacy
@@ -109,7 +121,7 @@ These are small tests run by the team, not a formal evaluation.
 - For TXT files, "page" means line number.
 - Replies can take from a few seconds to 30 to 40 seconds because of model latency.
 - Reminders run inside the bot process, so they are delivered only while the bot is running. Reminders that fell due while it was off are delivered on restart.
-- The bot runs on one machine, so it is offline when that machine is off. Please mail us so we turn the bot on for evaluation purpose.
+- The bot runs on a single machine and is unavailable when the host machine is offline.
 - No per-user rate limit is built yet, so heavy use spends the team's credits.
 - Crisis detection is phrase-based and can both miss unusual wording and flag a false alarm. It is a safety net, not a diagnosis.
 - The helplines are for India only.
