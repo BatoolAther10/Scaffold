@@ -1,4 +1,4 @@
-# Personal AI: a private assistant that plans your time and builds your knowledge
+# Scaffold : Plan your time. Build your mind. Need us less every week.
 
 A Telegram bot for students. It remembers you, reads documents you permit, answers with citations, saves reminders from plain English, and suggests reading sources. It is built to help you think, not to think for you.
 
@@ -66,7 +66,7 @@ Never commit `.env`, `.venv`, `*.db` or `user_docs/`. They are in `.gitignore`.
 ## Try it (demo)
 
 - **Demo bot:** https://t.me/originskbot
-- **Availability:** the bot runs on a team member's computer in Hyderabad, India (IST, UTC+5:30). Planned online hours on Dec 1 to 15, 2026: 6:00 PM to 12:00 AM IST (about 5:30 AM to 11:30 AM Pacific). Outside these hours the bot may be offline and will not reply; a screen recording of the full flow is in our demo video.
+- **Availability:** the bot runs on a team member's computer in Hyderabad, India (IST, UTC+5:30). Planned online hours on Dec 1 to 15, 2026: 6:00 PM to 12:00 AM IST (about 5:30 AM to 11:30 AM Pacific) (Please mail shaikrafooz@gmail.com to turn activate the bot for evaluation). Outside these hours the bot may be offline and will not reply; a screen recording of the full flow is in our demo video.
 - Suggested test messages:
   1. "hello"
   2. Send a PDF in the chat, then ask a question about it.
@@ -109,7 +109,7 @@ These are small tests run by the team, not a formal evaluation.
 - For TXT files, "page" means line number.
 - Replies can take from a few seconds to 30 to 40 seconds because of model latency.
 - Reminders run inside the bot process, so they are delivered only while the bot is running. Reminders that fell due while it was off are delivered on restart.
-- The bot runs on one machine, so it is offline when that machine is off.
+- The bot runs on one machine, so it is offline when that machine is off. Please mail us so we turn the bot on for evaluation purpose.
 - No per-user rate limit is built yet, so heavy use spends the team's credits.
 - Crisis detection is phrase-based and can both miss unusual wording and flag a false alarm. It is a safety net, not a diagnosis.
 - The helplines are for India only.
