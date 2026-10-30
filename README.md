@@ -86,7 +86,7 @@ Never commit `.env`, `.venv`, `*.db` or `user_docs/`. They are in `.gitignore`.
 ## Safety
 
 - This is a **self-reflection and learning tool. It is not therapy, medical advice or treatment.**
-- The crisis check runs in plain code before the model, with a phrase list that includes indirect phrasing. The reply is fixed text and encourages contact with a real person. The helplines are India-specific and were checked by the team on their official sites on [DATE YOU CHECKED]: https://telemanas.mohfw.gov.in/home, https://www.vandrevalafoundation.com/free-counseling, https://www.aasra.info/helpline.html, https://1life.org.in/, https://www.jeevanaastha.com/
+- The crisis check runs in plain code before the model, with a phrase list that includes indirect phrasing. The reply is fixed text and encourages contact with a real person. The helplines are India-specific and were checked by the team on their official sites on 29 Oct 2026: https://telemanas.mohfw.gov.in/home, https://www.vandrevalafoundation.com/free-counseling, https://www.aasra.info/helpline.html, https://1life.org.in/, https://www.jeevanaastha.com/
 - The model is told to answer document questions only from search results, to cite every claim, and to say so when it cannot find something.
 - We do not claim zero hallucination. We aim for verifiability: citations, a "not found" behaviour, and measured accuracy on small test sets (below).
 
